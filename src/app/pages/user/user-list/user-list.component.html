@@ -4,7 +4,7 @@
     <h3>
       Usuários
     </h3>
-    <button mat-button>Novo Usuário</button>
+    <button mat-button (click)="goToAddUser()">Novo Usuário</button>
   </div>
 
   <mat-form-field appearance="outline">
@@ -24,7 +24,7 @@
       <!-- Nome Column -->
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-        <td mat-cell *matCellDef="let row"> {{row.nome}}% </td>
+        <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
       </ng-container>
 
       <!-- email Column -->
@@ -36,18 +36,18 @@
       <!-- data de cadastro Column -->
       <ng-container matColumnDef="dataDeCadastro">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de Cadastro </th>
-        <td mat-cell *matCellDef="let row"> {{row.dataDeCadastro}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.dataDeCadastro | date : "dd-MM-YYYY hh:mm"}}</td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações</th>
         <td mat-cell *matCellDef="let row">
-          <button class="btn" mat-mini-fab>
+          <button (click)="goToEdit(row.id)" class="btn" mat-mini-fab>
             <mat-icon>
               <span class="material-symbols-outlined">edit</span>
             </mat-icon>
           </button>
-          <button class="btn" mat-mini-fab>
+          <button (click)="deleted(row.id)" class="btn" mat-mini-fab>
             <mat-icon>
               <span class="material-symbols-outlined">delete</span>
             </mat-icon>

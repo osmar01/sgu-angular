@@ -1,6 +1,6 @@
 <div class="container">
   <div class="back">
-    <button mat-button>
+    <button (click)="goToBack()" mat-button>
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
     <span>
@@ -9,27 +9,47 @@
   </div>
 
   <h3>Cadastrar Usuário</h3>
-  <form>
+  <form [formGroup]="form">
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
-      <input matInput>
+      <input formControlName="name" id="inputUserName" #input maxlength="70" matInput>
+      <mat-error *ngIf="form.controls['name'].hasError('required')">
+        Campo <strong>obrigatório</strong>
+      </mat-error>
+      <mat-error *ngIf="form.controls['email'].hasError('email')">
+        Por favor informe um email válido
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input type="email" matInput placeholder="Ex. nome@gmail.com">
+      <input type="email" formControlName="email" id="inputEmail" placeholder="email@example.com" maxlength="35"
+        matInput placeholder="Ex. nome@gmail.com">
+      <mat-error *ngIf="form.controls['email'].hasError('required')">
+        Campo <strong>obrigatório</strong>
+      </mat-error>
+      <mat-error *ngIf="form.controls['email'].hasError('email')">
+        Por favor informe um email válido
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Senha</mat-label>
-      <input matInput [type]="hide() ? 'password' : 'text'" />
+      <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" #inputPassword minlength="6"
+        maxlength="70" />
       <button mat-icon-button matSuffix type="button" (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide()">
         <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error *ngIf="form.controls['password'].hasError('required')">
+        Campo <strong>obrigatório</strong>
+      </mat-error>
+      <mat-error *ngIf="form.controls['password'].hasError('minlength')">
+        A senha deve ter mais de <strong>6 caracteres</strong>
+      </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button>Cadastrar</button>
+    <button (click)="save()" mat-raised-button>Cadastrar</button>
 
 
   </form>

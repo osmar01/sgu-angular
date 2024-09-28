@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: "",
     component: UserListComponent
+  },
+  {
+    path: "user-edit-insert/:idUser",
+    component: UserEditInsertComponent
   }
 ];
 

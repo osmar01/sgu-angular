@@ -8,6 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserListComponent } from './user-list/user-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+
+
   ]
 })
 export class UserModule { }

@@ -1,7 +1,13 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../models/user';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogYesNoComponent } from '../../../shared/shared/dialog-yes-no/dialog-yes-no.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface UserData {
   id: string;
@@ -10,90 +16,94 @@ export interface UserData {
   dataDeCadastro: string;
 }
 
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
-
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
 
-
-
-
 export class UserListComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['id', 'nome', 'email', 'dataDeCadastro', "acoes"];
-  dataSource!: MatTableDataSource<UserData>;
+  dataSource!: MatTableDataSource<User>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  data: User = { id: 2, nome: "joao", email: "ggdgdg", senha: "fdffd", dataDeCadastro: "dfdfdfdfd" }
+
+  users: User[] = [];
+
+  readonly dialog = inject(MatDialog);
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+
+  ) {
+    this.listUsers();
+
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  }
+
+  listUsers(): void {
+    this.userService.getAll().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.users = data;
+        this.dataSource = new MatTableDataSource(this.users);
+      },
+      error: () => {
+        // this.users = [this.data];
+        // this.dataSource = new MatTableDataSource(this.users)
+
+      },
+    });
+  }
+
+  deleteUser(id: number): void {
+    this.userService.delete(id).subscribe({
+      next: () => {
+        this.snackBar.open("Usuário apagado com sucesso", "Fechar", {
+          duration: 1000,
+        });
+      }
+    });
+  }
+
+
+  deleted(id: number): void {
+    this.openDialog(id);
+  }
+
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(DialogYesNoComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteUser(id);
+      }
+    });
+  }
+
+  goToEdit(id: any): void {
+    this.router.navigate([`user-edit-insert/${id}`], { relativeTo: this.route });
+  }
+
+  goToAddUser(): void {
+    this.router.navigate(['user-edit-insert/?'], { relativeTo: this.route });
   }
 
 }
 
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
-
-  return {
-    id: id.toString(),
-    nome: name,
-    email: Math.round(Math.random() * 100).toString(),
-    dataDeCadastro: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
-}
