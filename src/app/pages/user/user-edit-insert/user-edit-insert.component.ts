@@ -77,17 +77,18 @@ export class UserEditInsertComponent implements OnInit {
       },
       error: (err) => {
         if (err.error instanceof Error) {
-          this.snackBar.open(`Ocorreu um erro ao salvar usuário`, "Fechar", {
+          this.snackBar.open(`Ocorreu um erro ao criar novo usuário`, "Fechar", {
             duration: 5000,
           });
         } else {
           if (err.status == 401) {
             this.snackBar.open(
-              "Acesso negado ao servidor. Erro: " + err.status,
-              "Fechar",
-              {
-                duration: 5000,
-              }
+              `Acesso negado ao servidor. Erro: ${err.status}`, "Fechar",
+              { duration: 5000 }
+            );
+          }
+          if (err.status == 400) {
+            this.snackBar.open(`Erro: ${err.error.message}`, `Fechar`, { duration: 5000 }
             );
           }
         }
@@ -98,7 +99,6 @@ export class UserEditInsertComponent implements OnInit {
   update() {
     this.userService.update(this.user).subscribe({
       next: (res: User) => {
-        console.log(res);
         this.snackBar.open("Usuário atualizado com sucesso", "Fechar", {
           duration: 1000,
         });
@@ -109,17 +109,19 @@ export class UserEditInsertComponent implements OnInit {
       },
       error: (err) => {
         if (err.error instanceof Error) {
-          this.snackBar.open(`Ocorreu um erro ao atualizar o usuário`, "Fechar", {
+          this.snackBar.open(`Ocorreu um erro ao atualizar o usuário`, `Fechar`, {
             duration: 5000,
           });
         } else {
           if (err.status == 401) {
             this.snackBar.open(
-              "Acesso negado ao servidor. Erro: " + err.status,
-              "Fechar",
-              {
-                duration: 5000,
-              }
+              `Acesso negado ao servidor. Erro: ${err.status}`, `Fechar`,
+              { duration: 5000 }
+            );
+          }
+          if (err.status == 400) {
+            this.snackBar.open(
+              `Erro: ${err.error.message}`, `Fechar`, { duration: 5000 }
             );
           }
         }
