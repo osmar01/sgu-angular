@@ -1,14 +1,14 @@
+<app-sub-header-sing-out></app-sub-header-sing-out>
+
 <div class="container">
   <div class="back">
     <button (click)="goToBack()" mat-button>
-      <span class="material-symbols-outlined">arrow_back</span>
+      <span>Voltar</span>
     </button>
-    <span>
-      voltar
-    </span>
+
   </div>
 
-  <h3>Cadastrar Usuário</h3>
+  <h3>{{nameTitle}} Usuário</h3>
   <form [formGroup]="form">
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
@@ -49,8 +49,7 @@
       </mat-error>
     </mat-form-field>
 
-    <button (click)="save()" mat-raised-button>Cadastrar</button>
-
+    <button (click)="save()" mat-raised-button>{{nameBtn}}</button>
 
   </form>
 </div>

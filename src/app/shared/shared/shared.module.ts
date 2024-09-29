@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { DialogYesNoComponent } from './dialog-yes-no/dialog-yes-no.component';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { SubHeaderSingOutComponent } from './components/sub-header-sing-out/sub-header-sing-out.component';
 
 
 
 @NgModule({
   declarations: [
-    DialogYesNoComponent
+    DialogYesNoComponent,
+    SubHeaderSingOutComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogContent,
     MatDialogTitle,
   ],
-  exports: [DialogYesNoComponent]
+  exports: [
+    DialogYesNoComponent,
+    SubHeaderSingOutComponent
+  ]
 })
 export class SharedModule { }

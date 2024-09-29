@@ -11,6 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { SharedModule } from '../../shared/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,7 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
-
-
+    SharedModule
   ]
 })
 export class UserModule { }

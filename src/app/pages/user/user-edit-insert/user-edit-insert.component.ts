@@ -16,7 +16,8 @@ export class UserEditInsertComponent implements OnInit {
   form!: FormGroup;
   user!: User;
   idUser!: number;
-  isEdit!: boolean;
+  nameBtn: string = "Cadastrar";
+  nameTitle: string = "Cadastrar";
   hide = signal(true);
 
 
@@ -39,14 +40,14 @@ export class UserEditInsertComponent implements OnInit {
       if (id && id > 0) {
         this.userService.getById(id).subscribe({
           next: (data) => {
+            this.nameBtn = "Editar";
+            this.nameTitle = "Editar";
             this.user = data;
-            this.isEdit = false;
             this.setValues();
           }
         });
       } else {
         this.user = new User();
-        this.isEdit = true;
       }
     });
   }
@@ -74,22 +75,23 @@ export class UserEditInsertComponent implements OnInit {
           this.router.navigate(["list-user"]);
         }, 1100);
       },
-
       error: (err) => {
         if (err.error instanceof Error) {
-          this.snackBar.open("Ocorreu um erro ao salvar usuário", "Fechar", {
+          this.snackBar.open(`Ocorreu um erro ao salvar usuário`, "Fechar", {
             duration: 5000,
           });
         } else {
-          this.snackBar.open(
-            "Erro: retorno de código de status: " + err.status,
-            "Fechar",
-            {
-              duration: 5000,
-            }
-          );
+          if (err.status == 401) {
+            this.snackBar.open(
+              "Acesso negado ao servidor. Erro: " + err.status,
+              "Fechar",
+              {
+                duration: 5000,
+              }
+            );
+          }
         }
-      }
+      },
     });
   }
 
@@ -107,19 +109,21 @@ export class UserEditInsertComponent implements OnInit {
       },
       error: (err) => {
         if (err.error instanceof Error) {
-          this.snackBar.open("Ocorreu um erro no cliente ou na rede", "Fechar", {
+          this.snackBar.open(`Ocorreu um erro ao atualizar o usuário`, "Fechar", {
             duration: 5000,
           });
         } else {
-          this.snackBar.open(
-            "Erro: retorno de código de status: " + err.status,
-            "Fechar",
-            {
-              duration: 5000,
-            }
-          );
+          if (err.status == 401) {
+            this.snackBar.open(
+              "Acesso negado ao servidor. Erro: " + err.status,
+              "Fechar",
+              {
+                duration: 5000,
+              }
+            );
+          }
         }
-      }
+      },
     });
   }
 

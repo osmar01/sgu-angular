@@ -62,10 +62,22 @@ export class UserListComponent implements AfterViewInit {
         this.users = data;
         this.dataSource = new MatTableDataSource(this.users);
       },
-      error: () => {
-        // this.users = [this.data];
-        // this.dataSource = new MatTableDataSource(this.users)
-
+      error: (err) => {
+        if (err.error instanceof Error) {
+          this.snackBar.open("Ocorreu um erro ao salvar usuário", "Fechar", {
+            duration: 5000,
+          });
+        } else {
+          if (err.status == 401) {
+            this.snackBar.open(
+              "Acesso negado ao servidor. Erro: " + err.status,
+              "Fechar",
+              {
+                duration: 5000,
+              }
+            );
+          }
+        }
       },
     });
   }
@@ -77,7 +89,24 @@ export class UserListComponent implements AfterViewInit {
         this.snackBar.open("Usuário apagado com sucesso", "Fechar", {
           duration: 1000,
         });
-      }
+      },
+      error: (err) => {
+        if (err.error instanceof Error) {
+          this.snackBar.open("Ocorreu um erro ao apagar usuário", "Fechar", {
+            duration: 5000,
+          });
+        } else {
+          if (err.status == 401) {
+            this.snackBar.open(
+              "Acesso negado ao servidor. Erro: " + err.status,
+              "Fechar",
+              {
+                duration: 5000,
+              }
+            );
+          }
+        }
+      },
     });
   }
 
