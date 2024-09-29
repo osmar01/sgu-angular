@@ -73,6 +73,7 @@ export class UserListComponent implements AfterViewInit {
   deleteUser(id: number): void {
     this.userService.delete(id).subscribe({
       next: () => {
+        this.listUsers();
         this.snackBar.open("Usuário apagado com sucesso", "Fechar", {
           duration: 1000,
         });
@@ -98,11 +99,11 @@ export class UserListComponent implements AfterViewInit {
   }
 
   goToEdit(id: any): void {
-    this.router.navigate([`user-edit-insert/${id}`], { relativeTo: this.route });
+    this.router.navigate([`user-edit-insert/${id}`]);
   }
 
   goToAddUser(): void {
-    this.router.navigate(['user-edit-insert/?'], { relativeTo: this.route });
+    this.router.navigate(['user-edit-insert/?']);
   }
 
 }

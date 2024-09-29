@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { provideHttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { SharedModule } from './shared/shared/shared.module';
+import { LoginModule } from './pages/login/login.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SharedModule } from './shared/shared/shared.module';
     BrowserAnimationsModule,
     MatToolbarModule,
     UserModule,
-    SharedModule
+    SharedModule,
+    LoginModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { catchError, min, tap } from 'rxjs';
 import { User } from '../../../models/user';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -72,7 +71,7 @@ export class UserEditInsertComponent implements OnInit {
         });
 
         setTimeout(() => {
-          this.router.navigate([""], { relativeTo: this.route });
+          this.router.navigate(["list-user"]);
         }, 1100);
       },
 
@@ -103,7 +102,7 @@ export class UserEditInsertComponent implements OnInit {
         });
 
         setTimeout(() => {
-          this.router.navigate([""], { relativeTo: this.route });
+          this.router.navigate(["list-user"]);
         }, 1100);
       },
       error: (err) => {
@@ -162,7 +161,7 @@ export class UserEditInsertComponent implements OnInit {
   }
 
   goToBack(): void {
-    this.router.navigate([''], { relativeTo: this.route });
+    this.router.navigate(['list-user']);
   }
 
 }
