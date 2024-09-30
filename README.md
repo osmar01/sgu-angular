@@ -1,27 +1,77 @@
-# SguFront
+# Gerenciamento de Usuarios SGU
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Este projeto é uma aplicação de gerenciamento de usuários construída com Angular, que inclui operações de CRUD (Create, Read, Update, Delete), autenticação de usuários e sistema de login.
 
-## Development server
+## Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### CRUD de usuários:
+- Criar, listar, editar e excluir usuários.
+- Atributos dos usuários: ID, Nome, Email, Senha, Data de Cadastro.
+### Autenticação e Login:
+- Rotas protegidas, acessíveis apenas para usuários autenticados.
+- Sistema de login para validação de credenciais de usuário.
 
-## Code scaffolding
+## Tecnologias Utilizadas
+Frontend:
+- Angular (versão 18+)
+- HTML, CSS
+- Typescript,
+- SecureLS,
+- Angular Material
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Requisitos de Sistema
+- Node.js versão 18 ou superior
+- Angular CLI versão 18+
+- Npm versão 10+
+- Angular Material versão 18+
 
-## Build
+## Instalação
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Instale Sgu-front com npm
 
-## Running unit tests
+1. Clone este repositório:
+```bash
+  git clone https://github.com/osmar01/user-manager-system.git
+```
+2. Navegue até o diretório do projeto:
+```bash
+  cd user-manager-system
+```
+3. Instale as dependências:
+```bash
+  npm i
+```
+4. Inicie o servidor de desenvolvimento:
+```bash
+  ng serve
+```
+5. Acesse a aplicação em seu navegador:
+```bash
+  http://localhost:4200
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Autenticação
+A autenticação é baseada em tokens JWT.
+Ao fazer login, o token é armazenado no localStorage e é utilizado para proteger as rotas privadas.
 
-## Running end-to-end tests
+### usuário administrador
+Verificar se a Api esta rodando primeniro
+Utilize o usuário administrador para fazer login:
+```bash
+  email: admin@jabil.com
+  senha admin2024
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Contribuição
+Contribuições são bem-vindas! Por favor, siga os passos abaixo:
 
-## Further help
+- Faça um fork do projeto.
+- Crie uma branch para sua funcionalidade (git checkout -b nova-funcionalidade).
+- Faça o commit de suas alterações (git commit -am 'Adiciona nova funcionalidade').
+- Envie para o repositório remoto (git push origin nova-funcionalidade).
+- Abra um Pull Request.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Referência
+
+ - [GDS-training-ED](https://github.com/osmar01/GDS-training-ED.git)

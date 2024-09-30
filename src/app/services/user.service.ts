@@ -14,7 +14,7 @@ export class UserService {
     private storage: LocalStorageService
   ) { }
 
-  private BASE_ENDPOINT = 'https://localhost:7086/api';
+  private BASE_ENDPOINT = 'http://localhost:5297/api';
   private ENDPOINT_PATH = "/User";
 
   getAll(): Observable<any> {
