@@ -31,7 +31,7 @@ Instale Sgu-front com npm
 
 1. Clone este repositório:
 ```bash
-  git clone https://github.com/osmar01/user-manager-system.git
+  git clone https://github.com/osmar01/sgu-angular.git
 ```
 2. Navegue até o diretório do projeto:
 ```bash
