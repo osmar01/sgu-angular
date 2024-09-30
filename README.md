@@ -35,7 +35,7 @@ Instale Sgu-front com npm
 ```
 2. Navegue até o diretório do projeto:
 ```bash
-  cd user-manager-system
+  cd sgu-front
 ```
 3. Instale as dependências:
 ```bash
@@ -54,8 +54,9 @@ Instale Sgu-front com npm
 A autenticação é baseada em tokens JWT.
 Ao fazer login, o token é armazenado no localStorage e é utilizado para proteger as rotas privadas.
 
-### usuário administrador
-Verificar se a Api esta rodando primeniro
+### Usuário administrador
+Verificar se a Api esta rodando primeniro.
+
 Utilize o usuário administrador para fazer login:
 ```bash
   email: admin@jabil.com
@@ -63,8 +64,8 @@ Utilize o usuário administrador para fazer login:
 ```
 
 ## Contribuição
-Contribuições são bem-vindas! Por favor, siga os passos abaixo:
 
+Contribuições são bem-vindas! Por favor, siga os passos abaixo:
 - Faça um fork do projeto.
 - Crie uma branch para sua funcionalidade (git checkout -b nova-funcionalidade).
 - Faça o commit de suas alterações (git commit -am 'Adiciona nova funcionalidade').
