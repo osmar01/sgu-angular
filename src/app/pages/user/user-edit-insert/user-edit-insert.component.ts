@@ -66,7 +66,7 @@ export class UserEditInsertComponent implements OnInit {
   insert() {
     this.userService.insert(this.user).subscribe({
       next: (user: User) => {
-        console.log(user);
+        this.clearUser();
         this.snackBar.open("Usuário cadastrado com sucesso", "Fechar", {
           duration: 1000,
         });
@@ -153,12 +153,19 @@ export class UserEditInsertComponent implements OnInit {
     });
   }
 
-  setUser() {
+  setUser(): void {
     this.user.nome = this.form.get("name")?.value;
     this.user.email = this.form.get("email")?.value;
     this.user.senha = this.form.get("password")?.value;
     const dt = new Date();
     this.user.dataDeCadastro = dt.toISOString();
+  }
+
+  clearUser(): void {
+    this.user.nome = "";
+    this.user.email = "";
+    this.user.senha = "";
+    this.user.dataDeCadastro = "";
   }
 
   clickEvent(event: MouseEvent) {
